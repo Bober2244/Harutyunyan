@@ -8,18 +8,18 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieApi {
-    @GET("movie/popular")
+    @GET("")
     suspend fun getPopularMoviesPage(
         @Query("") pageNum : Int
     ) : MoviesPage
 
     @GET("")
     suspend fun getMovie(
-        @Path("id") id : Long
+        @Path("") id : Long
     ) : Movie
 
     @GET("")
     suspend fun getMovieCredits(
-        @Path("id") id : Long
+        @Path("") id : Long
     ) : MovieCredits
 }
