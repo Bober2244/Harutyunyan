@@ -22,12 +22,11 @@ val apiModule = module {
         OkHttpClient.Builder().cache(get()).apply {
             interceptors().add{
                 val request = it.request()
-                val url = request.url()
+                val url = request
                     .newBuilder()
-                    .addQueryParameter("api_key", API_KEY)
-                    .addQueryParameter("language", Locale.getDefault().toLanguageTag())
+                    .header("X-API-Key", API_KEY)
                     .build()
-                it.proceed(request.newBuilder().url(url).build())
+                it.proceed(url)
             }
         }.build()
     }

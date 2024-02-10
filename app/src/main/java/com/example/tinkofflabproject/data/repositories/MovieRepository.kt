@@ -16,7 +16,7 @@ class MovieRepository(
         get() = Pager(
             pagingSourceFactory = { MovieDataSource(movieApi) },
             config = PagingConfig(
-                pageSize = 10
+                pageSize = 20
             )
         ).flow
 

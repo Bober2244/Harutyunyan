@@ -8,13 +8,13 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieApi {
-    @GET("/api/v2.2/films/top")
+    @GET("/api/v2.2/films/collections")
     suspend fun getPopularMoviesPage(
         @Query("type") type : String,
         @Query("page") pageNum : Int
     ) : MoviesPage
 
-    @GET("/api/v2.2/films/top/{id}")
+    @GET("/api/v2.2/films/{id}")
     suspend fun getMovie(
         @Path("id") id : Long
     ) : Movie

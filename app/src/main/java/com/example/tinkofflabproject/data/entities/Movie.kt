@@ -10,7 +10,7 @@ data class Movie(
     @PrimaryKey
     @SerializedName("kinopoiskId")
     val id: Long,
-    @SerializedName("nameOriginal")
+    @SerializedName("nameRu")
     val title: String,
     @SerializedName("year")
     val releaseDate: String,
@@ -18,14 +18,4 @@ data class Movie(
     val poster: String,
     @SerializedName("posterUrlPreview")
     val backdrop: String,
-) : Serializable {
-    companion object {
-        val MOCK = Movie(
-            100,
-            "WoW",
-            "It's for me?",
-            "2024-02-10",
-            "",
-        )
-    }
-}
+) : Serializable
