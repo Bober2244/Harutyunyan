@@ -3,11 +3,10 @@ package com.example.tinkofflabproject.data.entities
 import com.google.gson.annotations.SerializedName
 
 data class MoviesPage(
-    val page: Int,
-    @SerializedName("")
-    val movies : List<Movie>,
-    @SerializedName("")
-    val totalPages : Int,
-    @SerializedName("")
+    @SerializedName("total")
     val totalResults : Int,
+    @SerializedName("totalPages")
+    val totalPages : Int,
+    @SerializedName("items")
+    val movies : List<Movie>,
 )

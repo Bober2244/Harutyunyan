@@ -7,29 +7,25 @@ import java.io.Serializable
 
 @Entity(tableName = "movies")
 data class Movie(
-    @PrimaryKey val id: Long,
+    @PrimaryKey
+    @SerializedName("kinopoiskId")
+    val id: Long,
+    @SerializedName("nameOriginal")
     val title: String,
-    @SerializedName("")
-    val overview: String,
-    @SerializedName("")
+    @SerializedName("year")
     val releaseDate: String,
-    @SerializedName("")
+    @SerializedName("posterUrl")
     val poster: String,
-    @SerializedName("")
+    @SerializedName("posterUrlPreview")
     val backdrop: String,
-    val revenue: Long,
-    val budget: Long,
-    val runtime: Long,
 ) : Serializable {
     companion object {
         val MOCK = Movie(
             100,
-            "Samsung Bootcamp 2021",
-            "Kotlin for Android",
-            "2021-07-19",
+            "WoW",
+            "It's for me?",
+            "2024-02-10",
             "",
-            "",
-            0,0,0
         )
     }
 }
