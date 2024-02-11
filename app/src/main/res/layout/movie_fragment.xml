@@ -161,12 +161,14 @@
                 <TextView
                     android:text="@string/genres"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/genres"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    tools:text="@tools:sample/us_zipcodes" />
+                    tools:text="@tools:sample/us_zipcodes"
+                    android:width="250dp"
+                    android:gravity="left"/>
 
                 <TextView
                     android:text="@string/country"
@@ -176,7 +178,9 @@
                 <TextView
                     android:id="@+id/country"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    tools:text="@tools:sample/us_zipcodes" />
+                    tools:text="@tools:sample/us_zipcodes"
+                    android:width="250dp"
+                    android:gravity="left"/>
 
                 <TextView
                     android:layout_columnSpan="2"

@@ -11,8 +11,6 @@ import com.example.tinkofflabproject.ui.popular.MoviePopularFragment
 
 class NetworkFragment() : Fragment(R.layout.network_fragment) {
 
-    private val viewModel : NetworkViewModel by viewModel()
-
     private lateinit var button: Button
     private var listener : OnButtonClickListener? = null
 
