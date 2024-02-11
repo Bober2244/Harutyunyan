@@ -145,7 +145,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginVertical="4dp" />
+                android:layout_marginVertical="4dp"
+                android:visibility="gone"/>
 
             <GridLayout
                 android:id="@+id/content"
@@ -158,16 +159,6 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:text="@string/runtime"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/runtime"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    tools:text="@tools:sample/full_names" />
-
-                <TextView
                     android:text="@string/genres"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:textStyle="bold" />
@@ -178,12 +169,12 @@
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <TextView
-                    android:text="@string/revenue"
+                    android:text="@string/country"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/revenue"
+                    android:id="@+id/country"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     tools:text="@tools:sample/us_zipcodes" />
 
@@ -191,20 +182,21 @@
                     android:layout_columnSpan="2"
                     android:layout_gravity="fill"
                     android:layout_marginVertical="4dp"
-                    android:text="@string/actors"
+                    android:text="@string/posters"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
                 <ProgressBar
                     android:id="@+id/progress_actors"
                     android:layout_columnSpan="2"
-                    android:layout_gravity="fill" />
+                    android:layout_gravity="fill"
+                    android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler"
                     android:layout_columnSpan="2"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_actor" />
+                    tools:listitem="@layout/item_poster" />
             </GridLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

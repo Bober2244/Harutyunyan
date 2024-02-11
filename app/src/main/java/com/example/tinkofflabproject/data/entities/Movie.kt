@@ -1,5 +1,6 @@
 package com.example.tinkofflabproject.data.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -18,8 +19,10 @@ data class Movie(
     val poster: String,
     @SerializedName("posterUrlPreview")
     val backdrop: String,
+    @ColumnInfo(name = "description", defaultValue = "")
     @SerializedName("description")
-    val overview : String,
+    val description : String,
+    /*@ColumnInfo(name = "runtime", defaultValue = "0")
     @SerializedName("filmLength")
-    val runtime : Long,
+    val runtime : Long,*/
 ) : Serializable

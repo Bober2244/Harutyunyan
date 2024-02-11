@@ -5,9 +5,10 @@
     <string name="genres">Жанры:</string>
     <string name="revenue">Зароботок:</string>
     <string name="runtime">Продолжительность:</string>
-    <string name="actors">Актеры:</string>
+    <string name="posters">Фан-арты</string>
     <string name="minutes">мин.</string>
     <string name="hours">ч.</string>
     <string name="repeat">Повторить</string>
     <string name="net_error">Произошла ошибка при загрузке данных, проверьте подключение к сети</string>
+    <string name="country">Страна:</string>
 </resources>

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tinkofflabproject.R
 import com.example.tinkofflabproject.data.entities.Poster
@@ -16,7 +15,7 @@ class PosterAdapter(
 ) : RecyclerView.Adapter<PosterAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_actor, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_poster, parent, false)
         return ViewHolder(view)
     }
 
@@ -28,8 +27,6 @@ class PosterAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image = itemView.findViewById(R.id.image) as ImageView
-        private val title = itemView.findViewById(R.id.title) as TextView
-        private val description = itemView.findViewById(R.id.description) as TextView
 
         fun bind(item: Poster) {
             if (item.imageUrl == null) {

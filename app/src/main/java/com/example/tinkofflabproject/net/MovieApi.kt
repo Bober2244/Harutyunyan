@@ -1,6 +1,6 @@
 package com.example.tinkofflabproject.net
 
-import com.example.tinkofflabproject.data.entities.Genres
+import com.example.tinkofflabproject.data.entities.Options
 import com.example.tinkofflabproject.data.entities.Movie
 import com.example.tinkofflabproject.data.entities.MoviePosters
 import com.example.tinkofflabproject.data.entities.MoviesPage
@@ -21,13 +21,13 @@ interface MovieApi {
     ) : Movie
 
     @GET("/api/v2.2/films/{id}")
-    suspend fun getMovieGenres(
+    suspend fun getMovieOptions(
         @Path("id") id : Long
-    ) : Genres
+    ) : Options
 
     @GET("/api/v2.2/films/{id}/images")
     suspend fun getMovieCredits(
-        @Query("id") id : Long,
+        @Path("id") id : Long,
         @Query("type") type: String
     ) : MoviePosters
 }

@@ -3,8 +3,10 @@ package com.example.tinkofflabproject.ui.movie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.example.tinkofflabproject.data.entities.Country
 import com.example.tinkofflabproject.data.entities.Genre
 import com.example.tinkofflabproject.data.entities.Movie
+import com.example.tinkofflabproject.data.entities.Options
 import com.example.tinkofflabproject.data.entities.Poster
 import com.example.tinkofflabproject.data.repositories.MovieRepository
 import com.example.tinkofflabproject.utils.State
@@ -37,7 +39,18 @@ class MovieViewModel(
         }
     }
 
-    val stateActor : LiveData<State<List<Poster>>> = liveData {
+    val stateCountry : LiveData<State<List<Country>>> = liveData {
+        emit(State.Loading())
+        withContext(Dispatchers.IO){
+            try {
+                emit(State.Success(repository.getMovieCountry(movie.id)))
+            } catch (e : Exception){
+                emit(State.Error<List<Country>>(e))
+            }
+        }
+    }
+
+    val statePoster : LiveData<State<List<Poster>>> = liveData {
         emit(State.Loading())
         withContext(Dispatchers.IO) {
             try {

@@ -2,6 +2,7 @@ package com.example.tinkofflabproject.ui.movie
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -19,7 +20,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.text.DecimalFormat
 import kotlin.math.abs
 
 class MovieFragment : Fragment(R.layout.movie_fragment) {
@@ -36,9 +36,8 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
     private lateinit var date : TextView
     private lateinit var description : TextView
     private lateinit var releaseDate : TextView
-    private lateinit var runtime : TextView
     private lateinit var genres : TextView
-    private lateinit var revenue : TextView
+    private lateinit var countries : TextView
     private lateinit var recyclerActors : RecyclerView
 
     private lateinit var progressBar : View
@@ -56,6 +55,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                     loadingStatus(true)
                 }
                 is State.Error -> {
+                    Log.e("Movie error", it.throwable.message.toString())
                     Snackbar.make(view,
                         "${it.throwable.message}",
                         Snackbar.LENGTH_LONG
@@ -75,6 +75,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                     genres.visibility = View.GONE
                 }
                 is State.Error -> {
+                    Log.e("Genre error", it.throwable.message.toString())
                     Snackbar.make(
                         view,
                         "${it.throwable.message}",
@@ -89,13 +90,36 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
             }
         }
 
-        viewModel.stateActor.observe(viewLifecycleOwner) {
+        viewModel.stateCountry.observe(viewLifecycleOwner){
+            when(it){
+                is State.Loading -> {
+                    progressBar.visibility = View.VISIBLE
+                    countries.visibility = View.GONE
+                }
+                is State.Error -> {
+                    Log.e("Country error", it.throwable.message.toString())
+                    Snackbar.make(
+                        view,
+                        "${it.throwable.message}",
+                        Snackbar.LENGTH_LONG
+                    )
+                }
+                is State.Success -> {
+                    progressBar.visibility = View.GONE
+                    countries.visibility = View.VISIBLE
+                    countries.text = it.data.fold(acc){acc, country -> acc + country.country + " " }
+                }
+            }
+        }
+
+        viewModel.statePoster.observe(viewLifecycleOwner) {
             when(it){
                 is State.Loading -> {
                     progressBar.visibility = View.VISIBLE
                     recyclerActors.visibility = View.GONE
                 }
                 is State.Error -> {
+                    Log.e("Poster error", it.throwable.message.toString())
                     Snackbar.make(view,
                         "${it.throwable.message}",
                         Snackbar.LENGTH_LONG
@@ -117,9 +141,8 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
         date = view.findViewById(R.id.date)
         description = view.findViewById(R.id.description)
         releaseDate = view.findViewById(R.id.release_date)
-        runtime = view.findViewById(R.id.runtime)
         genres = view.findViewById(R.id.genres)
-        revenue = view.findViewById(R.id.revenue)
+        countries = view.findViewById(R.id.country)
         recyclerActors = view.findViewById(R.id.recycler)
 
         progressBar = view.findViewById(R.id.progress)
@@ -139,13 +162,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
         title.text = movie.title
         date.text = movie.releaseDate
         releaseDate.text = movie.releaseDate
-        val numberFormat  = DecimalFormat.getNumberInstance()
-        runtime.text = "${(movie.runtime)/60 } ${R.string.hours} ${(movie.runtime)%60} ${R.string.minutes}"
-        description.text = movie.overview
-        //genres.text = "\$ ${numberFormat.format(movie.budget)}"
-        /*
-        revenue.text = "\$ ${numberFormat.format(movie.revenue)}"
-        */
+        description.text = movie.description
     }
 
     private fun loadingStatus(isLoading: Boolean) {

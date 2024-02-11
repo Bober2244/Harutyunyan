@@ -38,7 +38,7 @@ class MovieAdapter(
         fun bind(item: Movie) {
             title.text = item.title
             date.text = item.releaseDate
-            description.text = item.overview
+            description.text = item.description
 
             title.post {
                 description.maxLines = 4 - title.lineCount
