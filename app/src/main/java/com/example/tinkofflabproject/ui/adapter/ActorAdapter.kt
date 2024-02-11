@@ -7,11 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tinkofflabproject.R
-import com.example.tinkofflabproject.data.entities.Actor
 import com.example.tinkofflabproject.utils.IMAGE_URL
 import com.example.tinkofflabproject.utils.px
 import com.squareup.picasso.Picasso
 
+//TODO: Раскомитить
+/*
 class ActorAdapter(
     private val data: List<Actor>
 ) : RecyclerView.Adapter<ActorAdapter.ViewHolder>() {
@@ -51,3 +52,4 @@ class ActorAdapter(
 
     }
 }
+ */

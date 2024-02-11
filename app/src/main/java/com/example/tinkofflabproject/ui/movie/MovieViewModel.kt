@@ -3,7 +3,6 @@ package com.example.tinkofflabproject.ui.movie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.tinkofflabproject.data.entities.Actor
 import com.example.tinkofflabproject.data.entities.Movie
 import com.example.tinkofflabproject.data.repositories.MovieRepository
 import com.example.tinkofflabproject.utils.State
@@ -25,7 +24,8 @@ class MovieViewModel(
         }
     }
 
-    val stateActor : LiveData<State<List<Actor>>> = liveData {
+    //TODO: Раскомитить
+        /*val stateActor : LiveData<State<List<Actor>>> = liveData {
         emit(State.Loading())
         withContext(Dispatchers.IO){
             try {
@@ -34,5 +34,5 @@ class MovieViewModel(
                 emit(State.Error<List<Actor>>(e))
             }
         }
-    }
+    }*/
 }

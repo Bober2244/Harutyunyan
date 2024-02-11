@@ -2,6 +2,7 @@ package com.example.tinkofflabproject.ui.movie
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tinkofflabproject.R
 import com.example.tinkofflabproject.data.entities.Movie
-import com.example.tinkofflabproject.ui.adapter.ActorAdapter
 import com.example.tinkofflabproject.utils.BACKDROP_URL
 import com.example.tinkofflabproject.utils.IMAGE_URL
 import com.example.tinkofflabproject.utils.State
@@ -57,6 +57,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                     loadingStatus(true)
                 }
                 is State.Error -> {
+                    Log.e("Room", it.throwable.message.toString())
                     Snackbar.make(view,
                         "${it.throwable.message}",
                         Snackbar.LENGTH_LONG
@@ -68,7 +69,8 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                 }
             }
         }
-        viewModel.stateActor.observe(viewLifecycleOwner) {
+        //TODO: Раскомитить
+        /*viewModel.stateActor.observe(viewLifecycleOwner) {
             when(it){
                 is State.Loading -> {
                     progressBar.visibility = View.VISIBLE
@@ -87,6 +89,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                 }
             }
         }
+         */
     }
 
     private fun initViews(view: View) {

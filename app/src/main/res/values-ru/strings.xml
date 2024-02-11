@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TinkoffLabProject</string>
+    <string name="release_date">Дата Выхода:</string>
+    <string name="budget">Бюджет:</string>
+    <string name="revenue">Зароботок:</string>
+    <string name="runtime">Продолжительность:</string>
+    <string name="actors">Актёры:</string>
+</resources>

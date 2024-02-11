@@ -1,7 +1,7 @@
 package com.example.tinkofflabproject.net
 
+import com.example.tinkofflabproject.data.entities.Genres
 import com.example.tinkofflabproject.data.entities.Movie
-import com.example.tinkofflabproject.data.entities.MovieCredits
 import com.example.tinkofflabproject.data.entities.MoviesPage
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,8 +19,8 @@ interface MovieApi {
         @Path("id") id : Long
     ) : Movie
 
-    @GET("")
-    suspend fun getMovieCredits(
-        @Path("") id : Long
-    ) : MovieCredits
+    @GET("/api/v2.2/films/{id}")
+    suspend fun getMovieGenres(
+        @Path("id") id : Long
+    ) : Genres
 }

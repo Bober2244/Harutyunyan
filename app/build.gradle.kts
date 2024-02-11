@@ -14,7 +14,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -53,7 +52,6 @@ dependencies {
     implementation("io.insert-koin:koin-core:$koin_version")
     implementation("io.insert-koin:koin-android:$koin_version")
     implementation("io.insert-koin:koin-android-compat:$koin_version")
-    //implementation("org.jetbrains.kotlin:kotlin-stdlib:1.12.0")
     implementation("com.squareup.picasso:picasso:2.8")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

@@ -3,7 +3,7 @@ package com.example.tinkofflabproject.data.repositories
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.example.tinkofflabproject.data.dao.MovieDao
-import com.example.tinkofflabproject.data.entities.Actor
+import com.example.tinkofflabproject.data.entities.Genre
 import com.example.tinkofflabproject.data.entities.Movie
 import com.example.tinkofflabproject.net.MovieApi
 
@@ -29,8 +29,16 @@ class MovieRepository(
         return movie
     }
 
+    suspend fun getMovieGenres(movieId: Long) : List<Genre> {
+        val genres = movieApi.getMovieGenres(movieId)
+        return genres.genres
+    }
+
+    //TODO: Раскомитить
+    /*
     suspend fun getMovieCredits(movieId : Long) : List<Actor> {
         val credits = movieApi.getMovieCredits(movieId)
         return credits.cast
     }
+     */
 }
