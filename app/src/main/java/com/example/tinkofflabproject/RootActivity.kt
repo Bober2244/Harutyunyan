@@ -67,7 +67,7 @@ class RootActivity : AppCompatActivity(), NetworkFragment.OnButtonClickListener{
     private val runnable = object : Runnable {
         override fun run() {
             connect()
-            handler.postDelayed(this, 1000)
+            handler.postDelayed(this, 2000)
         }
     }
 }
