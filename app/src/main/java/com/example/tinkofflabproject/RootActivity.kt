@@ -5,27 +5,31 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tinkofflabproject.ui.movie.MovieFragment
 import com.example.tinkofflabproject.ui.network.NetworkFragment
 import com.example.tinkofflabproject.ui.popular.MoviePopularFragment
 
-class RootActivity : AppCompatActivity(), NetworkFragment.OnButtonClickListener {
+class RootActivity : AppCompatActivity(), NetworkFragment.OnButtonClickListener{
+
+    private val  handler = Handler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.root_activity)
-        if (checkForInternet(this)) {
             if (savedInstanceState == null) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, MoviePopularFragment.newInstance())
                     .commitNow()
             }
-        }
-        else {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, NetworkFragment())
-                .commitNow()
-        }
+        handler.post(runnable)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(runnable)
     }
 
     fun checkForInternet(context : Context) : Boolean{
@@ -46,9 +50,24 @@ class RootActivity : AppCompatActivity(), NetworkFragment.OnButtonClickListener 
 
     override fun onButtonClick() {
         if (checkForInternet(this)) {
-            val transaction = supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MoviePopularFragment.newInstance())
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, MoviePopularFragment())
                 .commit()
+        }
+    }
+
+    fun connect(){
+        if (!checkForInternet(this)){
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, NetworkFragment())
+                .commit()
+        }
+    }
+
+    private val runnable = object : Runnable {
+        override fun run() {
+            connect()
+            handler.postDelayed(this, 1000)
         }
     }
 }

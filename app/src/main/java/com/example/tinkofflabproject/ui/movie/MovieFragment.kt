@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tinkofflabproject.R
 import com.example.tinkofflabproject.data.entities.Movie
 import com.example.tinkofflabproject.ui.adapter.PosterAdapter
+import com.example.tinkofflabproject.ui.popular.MoviePopularFragment
 import com.example.tinkofflabproject.utils.State
 import com.example.tinkofflabproject.utils.startAlphaAnimation
 import com.google.android.material.appbar.AppBarLayout
@@ -79,8 +80,8 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                     Snackbar.make(
                         view,
                         "${it.throwable.message}",
-                        Snackbar.LENGTH_LONG
-                    )
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
                 is State.Success -> {
                     progressBar.visibility = View.GONE
@@ -101,8 +102,8 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                     Snackbar.make(
                         view,
                         "${it.throwable.message}",
-                        Snackbar.LENGTH_LONG
-                    )
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
                 is State.Success -> {
                     progressBar.visibility = View.GONE
@@ -122,7 +123,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                     Log.e("Poster error", it.throwable.message.toString())
                     Snackbar.make(view,
                         "${it.throwable.message}",
-                        Snackbar.LENGTH_LONG
+                        Snackbar.LENGTH_SHORT
                     ).show()
                 }
                 is State.Success -> {
@@ -195,6 +196,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
             }
         }
     }
+
 
     companion object {
         private const val ARG_MOVIE = "movie"
