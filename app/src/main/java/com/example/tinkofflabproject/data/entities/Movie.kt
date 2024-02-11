@@ -18,6 +18,8 @@ data class Movie(
     val poster: String,
     @SerializedName("posterUrlPreview")
     val backdrop: String,
-    //@SerializedName("description")
-    //val overview : String
+    @SerializedName("description")
+    val overview : String,
+    @SerializedName("filmLength")
+    val runtime : Long,
 ) : Serializable

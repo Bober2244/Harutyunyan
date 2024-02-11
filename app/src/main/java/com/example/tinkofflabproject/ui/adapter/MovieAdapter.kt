@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tinkofflabproject.R
 import com.example.tinkofflabproject.data.entities.Movie
-import com.example.tinkofflabproject.utils.IMAGE_URL
 import com.example.tinkofflabproject.utils.px
 import com.squareup.picasso.Picasso
 
@@ -39,14 +38,14 @@ class MovieAdapter(
         fun bind(item: Movie) {
             title.text = item.title
             date.text = item.releaseDate
-            //description.text = item.overview
+            description.text = item.overview
 
             title.post {
                 description.maxLines = 4 - title.lineCount
             }
 
             Picasso.get()
-                .load(IMAGE_URL + item.poster)
+                .load(item.poster)
                 .resize(96.px, 144.px)
                 .centerCrop()
                 .placeholder(R.drawable.shape_image)

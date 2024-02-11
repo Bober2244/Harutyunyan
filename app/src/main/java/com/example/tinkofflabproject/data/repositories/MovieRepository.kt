@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import com.example.tinkofflabproject.data.dao.MovieDao
 import com.example.tinkofflabproject.data.entities.Genre
 import com.example.tinkofflabproject.data.entities.Movie
+import com.example.tinkofflabproject.data.entities.Poster
 import com.example.tinkofflabproject.net.MovieApi
 
 class MovieRepository(
@@ -34,11 +35,8 @@ class MovieRepository(
         return genres.genres
     }
 
-    //TODO: Раскомитить
-    /*
-    suspend fun getMovieCredits(movieId : Long) : List<Actor> {
-        val credits = movieApi.getMovieCredits(movieId)
+    suspend fun getMovieCredits(movieId : Long) : List<Poster> {
+        val credits = movieApi.getMovieCredits(movieId, "FAN_ART")
         return credits.cast
     }
-     */
 }

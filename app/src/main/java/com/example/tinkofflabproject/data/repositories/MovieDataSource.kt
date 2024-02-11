@@ -16,8 +16,8 @@ class MovieDataSource(private val apiService: MovieApi) : PagingSource<Int, Movi
                 data = response.movies,
                 prevKey = if (pageNum < 1) null else pageNum - 1,
                 nextKey = if (pageNum > response.totalPages) null else pageNum + 1
-                )
-            }
+            )
+        }
         catch (e : Exception){
             Log.e("Response error", e.message!!)
             LoadResult.Error(e)

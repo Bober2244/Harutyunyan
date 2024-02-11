@@ -7,15 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tinkofflabproject.R
-import com.example.tinkofflabproject.utils.IMAGE_URL
+import com.example.tinkofflabproject.data.entities.Poster
 import com.example.tinkofflabproject.utils.px
 import com.squareup.picasso.Picasso
 
-//TODO: Раскомитить
-/*
-class ActorAdapter(
-    private val data: List<Actor>
-) : RecyclerView.Adapter<ActorAdapter.ViewHolder>() {
+class PosterAdapter(
+    private val data: List<Poster>
+) : RecyclerView.Adapter<PosterAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_actor, parent, false)
@@ -33,23 +31,19 @@ class ActorAdapter(
         private val title = itemView.findViewById(R.id.title) as TextView
         private val description = itemView.findViewById(R.id.description) as TextView
 
-        fun bind(item: Actor) {
+        fun bind(item: Poster) {
             if (item.imageUrl == null) {
                 image.setImageResource(R.drawable.shape_image)
             } else {
                 Picasso.get()
-                    .load(IMAGE_URL + item.imageUrl)
+                    .load(item.imageUrl)
                     .resize(144.px,144.px)
                     .centerCrop()
                     .placeholder(R.drawable.shape_image)
                     .error(R.drawable.shape_broken_image)
                     .into(image)
             }
-
-            title.text = item.name
-            description.text = item.character
         }
 
     }
 }
- */

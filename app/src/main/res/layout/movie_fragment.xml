@@ -168,12 +168,12 @@
                     tools:text="@tools:sample/full_names" />
 
                 <TextView
-                    android:text="@string/budget"
+                    android:text="@string/genres"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/budget"
+                    android:id="@+id/genres"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     tools:text="@tools:sample/us_zipcodes" />
 

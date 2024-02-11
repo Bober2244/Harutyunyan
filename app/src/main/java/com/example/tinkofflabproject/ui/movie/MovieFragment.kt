@@ -2,7 +2,6 @@ package com.example.tinkofflabproject.ui.movie
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -12,8 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tinkofflabproject.R
 import com.example.tinkofflabproject.data.entities.Movie
-import com.example.tinkofflabproject.utils.BACKDROP_URL
-import com.example.tinkofflabproject.utils.IMAGE_URL
+import com.example.tinkofflabproject.ui.adapter.PosterAdapter
 import com.example.tinkofflabproject.utils.State
 import com.example.tinkofflabproject.utils.startAlphaAnimation
 import com.google.android.material.appbar.AppBarLayout
@@ -31,6 +29,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
 
     private val viewModel : MovieViewModel by viewModel{ parametersOf(movie) }
 
+    private var acc: String = ""
     private lateinit var poster : ImageView
     private lateinit var backdrop : ImageView
     private lateinit var title : TextView
@@ -38,7 +37,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
     private lateinit var description : TextView
     private lateinit var releaseDate : TextView
     private lateinit var runtime : TextView
-    private lateinit var budget : TextView
+    private lateinit var genres : TextView
     private lateinit var revenue : TextView
     private lateinit var recyclerActors : RecyclerView
 
@@ -57,7 +56,6 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                     loadingStatus(true)
                 }
                 is State.Error -> {
-                    Log.e("Room", it.throwable.message.toString())
                     Snackbar.make(view,
                         "${it.throwable.message}",
                         Snackbar.LENGTH_LONG
@@ -69,8 +67,29 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                 }
             }
         }
-        //TODO: Раскомитить
-        /*viewModel.stateActor.observe(viewLifecycleOwner) {
+
+        viewModel.stateGenre.observe(viewLifecycleOwner){
+            when(it){
+                is State.Loading -> {
+                    progressBar.visibility = View.VISIBLE
+                    genres.visibility = View.GONE
+                }
+                is State.Error -> {
+                    Snackbar.make(
+                        view,
+                        "${it.throwable.message}",
+                        Snackbar.LENGTH_LONG
+                    )
+                }
+                is State.Success -> {
+                    progressBar.visibility = View.GONE
+                    genres.visibility = View.VISIBLE
+                    genres.text = it.data.fold(acc){acc, genre -> acc + genre.genre + " " }
+                }
+            }
+        }
+
+        viewModel.stateActor.observe(viewLifecycleOwner) {
             when(it){
                 is State.Loading -> {
                     progressBar.visibility = View.VISIBLE
@@ -85,11 +104,10 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
                 is State.Success -> {
                     progressBar.visibility = View.GONE
                     recyclerActors.visibility = View.VISIBLE
-                    recyclerActors.adapter = ActorAdapter(it.data)
+                    recyclerActors.adapter = PosterAdapter(it.data)
                 }
             }
         }
-         */
     }
 
     private fun initViews(view: View) {
@@ -100,7 +118,7 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
         description = view.findViewById(R.id.description)
         releaseDate = view.findViewById(R.id.release_date)
         runtime = view.findViewById(R.id.runtime)
-        budget = view.findViewById(R.id.budget)
+        genres = view.findViewById(R.id.genres)
         revenue = view.findViewById(R.id.revenue)
         recyclerActors = view.findViewById(R.id.recycler)
 
@@ -112,21 +130,21 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
 
     private fun bindView(movie: Movie) {
         Picasso.get()
-            .load(IMAGE_URL + movie.poster)
+            .load(movie.poster)
             .into(poster)
         Picasso.get()
-            .load(BACKDROP_URL + movie.backdrop)
+            .load(movie.backdrop)
             .into(backdrop)
 
         title.text = movie.title
         date.text = movie.releaseDate
         releaseDate.text = movie.releaseDate
         val numberFormat  = DecimalFormat.getNumberInstance()
-        /*
-        budget.text = "\$ ${numberFormat.format(movie.budget)}"
-        revenue.text = "\$ ${numberFormat.format(movie.revenue)}"
-        runtime.text = "${movie.runtime} min."
+        runtime.text = "${(movie.runtime)/60 } ${R.string.hours} ${(movie.runtime)%60} ${R.string.minutes}"
         description.text = movie.overview
+        //genres.text = "\$ ${numberFormat.format(movie.budget)}"
+        /*
+        revenue.text = "\$ ${numberFormat.format(movie.revenue)}"
         */
     }
 
@@ -147,17 +165,18 @@ class MovieFragment : Fragment(R.layout.movie_fragment) {
 
         val appBarLayout = view.findViewById<AppBarLayout>(R.id.appBarLayout)
         var isTitleVisible = false
-        appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBar, offset ->
+        appBarLayout.addOnOffsetChangedListener { appBar, offset ->
             val isVisible = abs(offset.toFloat()) / appBar.totalScrollRange >= 0.9f
             if (isVisible != isTitleVisible) {
                 toolbarTitle.startAlphaAnimation(
                     isVisible,
                     appBar.resources
-                        .getInteger(com.google.android.material.R.integer.app_bar_elevation_anim_duration).toLong()
+                        .getInteger(com.google.android.material.R.integer.app_bar_elevation_anim_duration)
+                        .toLong()
                 )
                 isTitleVisible = isVisible
             }
-        })
+        }
     }
 
     companion object {
