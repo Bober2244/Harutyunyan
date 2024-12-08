@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TinkoffLabProject">
         <activity android:name=".RootActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
